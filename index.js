@@ -1,40 +1,8 @@
-
-
-
 const pool = require('./util/mysql.js');
 const args = process.argv.slice(1);
+
 let { t1, t2, t3, location, tag, homeUrl } = require(args[1]);
-// for (let i = 0; i < filePath.length; i++) {
-//     ({ t1, t2, t3, location, tag, homeUrl } = require(filePath[i]));
 
-//     const command = 'node index.js';
-
-//     execSync(command);
-// }
-
-
-
-
-// async function main() {
-
-//     let info =  await new Promise((resolve, reject) => { 
-//         quertSql = 'select * from zhaoshang '
-//         pool.query(quertSql, (err, result) => {
-//             if (err) {
-//               reject(err)
-//             } else {
-
-//             }
-//         })
-//     })
-
-
-// }
-
-
-// let tag = "新闻动态";
-// let tag = '政策解读'
-//获取所有列表页
 /**
  * 
  * @param {*} url 入口页的链接 
@@ -55,12 +23,9 @@ async function getListPage(url) {
     }
 
     return urlPagesList || [];
-
 }
 
 // 获取列表页的详情
-
-
 async function getListDetail(url) {
 
     let urlPagesList = await getListPage(url);
@@ -75,15 +40,15 @@ async function getListDetail(url) {
             urlArticleList = await t2(urlPagesList[i])
 
         } catch (e) {
-            console.log( 't2方法返回值有问题' + e);
+            console.log('t2方法返回值有问题' + e);
             return
         }
 
-    
+
         for (let j = 0; j < urlArticleList.length; j++) {
             sleep(300)
             let count = await new Promise((resolve, reject) => {
-                pool.query(`SELECT COUNT(*) AS count FROM listpages WHERE url = '${urlArticleList[j]}'`, (error, results) => {
+                pool.query(`SELECT COUNT(*) AS count FROM url_article WHERE url = '${urlArticleList[j]}'`, (error, results) => {
                     if (error) {
                         console.error('查询链接失败:', error);
                         resolve(2)
@@ -96,7 +61,7 @@ async function getListDetail(url) {
             if (count === 0) {
                 try {
                     let insertId = await new Promise((resolve, reject) => {
-                        pool.query(`insert into listpages(url,postion,tag) values('${urlArticleList[j]}','${location}','${tag}')`, (error, results) => {
+                        pool.query(`insert into url_article(url,postion,tag_type) values('${urlArticleList[j]}','${location}','${tag}')`, (error, results) => {
                             if (error) {
                                 console.error('文章链接插入失败:', error);
                                 resolve(`第${results.insertId}条，插入失败`)
@@ -136,23 +101,23 @@ async function getListDetail(url) {
 // 获取文章详情
 async function getArticleDetail() {
 
-    await pool.query(`select * from listpages where status = 0 && postion ='${location}' && tag ='${tag}'`, async (error, results) => {
+    await pool.query(`select * from url_article where status = 0 && postion ='${location}' && tag_type ='${tag}'`, async (error, results) => {
         console.log('开始查询文章');
         if (error) {
             console.error('查询失败:', error);
             process.exit();
-       
+
         }
         if (results.length === 0) {
             console.log('没有数据');
             process.exit();
-   
+
         }
         for (let i = 0; i < results.length; i++) {
 
             try {
                 let url = results[i].url;
-                console.log('正在查询第' + results[i].id + '个');
+                console.log('正在查询第' + results[i].url_id + '个');
 
                 //_____________
                 await sleep(300);
@@ -169,15 +134,16 @@ async function getArticleDetail() {
                         continue
                     }
 
-       
+
                 }
 
                 let create_time = getCreateDate()
                 let postion = results[i].postion
-                let tag_type = '政策法律-' + results[i].tag
+                let tag_type = results[i].tag_type
+                let url_id = results[i].url_id
 
-                const insert = `INSERT INTO articleContent (title, author, digest, content, content_source_url,url, publish_date,nav_type,tag_type,status,article_sort,create_time,postion,img_exist,pdf_exist) VALUES (?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)`;
-                let params = [title, author, digest, content, url, url, publish_date, 'policiesLaws', tag_type, 2, 33, create_time, postion, img_exist, pdf_exist]
+                const insert = `INSERT INTO article_content (title, author,url_id,content,publish_date,tag_type,postion) VALUES (?,?,?,?,?,?,?)`;
+                let params = [title, author, url_id, content, publish_date, tag_type, postion]
                 let flagSuccess = await new Promise((resolve, reject) => {
                     pool.query(insert, params, (error, results) => {
                         if (error) {
@@ -194,7 +160,7 @@ async function getArticleDetail() {
 
                 if (flagSuccess) {
                     let falg = await new Promise((resolve, rejects) => {
-                        pool.query('update listpages set status = 2 where id = ' + results[i].id, (error, results) => {
+                        pool.query('update url_article set status = 1 where url_id = ' + results[i].url_id, (error, results) => {
                             if (error) {
                                 resolve(false)
                             } else {
@@ -203,10 +169,10 @@ async function getArticleDetail() {
                         })
                     })
                     if (falg) {
-                        console.log(`第${results[i].id}条状态改变成功`);
+                        console.log(`第${results[i].url_id}条状态改变成功`);
 
                     } else {
-                        console.log(`第${results[i].id}条状态改变失败`);
+                        console.log(`第${results[i].url_id}条状态改变失败`);
 
                     }
                 }

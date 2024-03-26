@@ -33,7 +33,7 @@ async function t1(url) {
     }
     // console.log(urlList);
     return urlList
-  
+
 }
 
 async function t2(url) {
@@ -69,12 +69,12 @@ async function t3(url) {
 
 
         let title = $('ucaptitle').text().trim()
-        let str1= $('.zwgk_comr1 li').eq(3).find('span').eq('1').text().trim()
+        let str1 = $('.zwgk_comr1 li').eq(3).find('span').eq('1').text().trim()
         var patter = /\d+/g;
-        let publish_date = str1.match(patter).slice(0,3).join('.')
+        let publish_date = str1.match(patter).slice(0, 3).join('.')
         let author = $('.zwgk_comr1 ul li ').eq(1).find('span:first ').text().split('：')[1].trim()
 
-        let content = $('ucapcontent').html()
+        let content = $('ucapcontent').text()
 
         let str = $('ucapcontent').text().trim().slice(0, 100)
 

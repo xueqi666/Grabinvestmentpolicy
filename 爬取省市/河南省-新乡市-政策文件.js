@@ -109,7 +109,7 @@ async function t3(url) {
         let publish_date = $('.hap_xq_data span').eq(2).text().split(' ')[0].split('-').join('.')
         let author = $('.hap_xq_data span').eq(1).text().trim()
         let content_h = $('.hap_xq_content')
-        let content = content_h.html()
+        let content = content_h.text()
 
         let digest = content_h.text().replace(/[\r\n\s]+/g, "").slice(0, 100);
         let img_exist = 0;

@@ -71,7 +71,7 @@ async function t3(url) {
         let publish_date = $('#date').text().trim().split('  ')[0].split('：')[1].split('-').join('.')
         let author = $('#source').text().trim().substring(5).trim()
 
-        let content = $('.BSHARE_TEXT').html()
+        let content = $('.BSHARE_TEXT').text()
 
         let str = $('.BSHARE_TEXT').text().trim().slice(0, 100)
 
@@ -92,7 +92,7 @@ async function t3(url) {
 
 
 
-} 
+}
 // t1('https://www.hiipb.com/news/15-1.html')
 // t2('https://www.hiipb.com/news/15-1.html')
 // t3('http://syipb.sanya.gov.cn/tzcjjsite/zcjd/202311/b6ef1dbe9d654d15965294fe3a2b7e05.shtml')

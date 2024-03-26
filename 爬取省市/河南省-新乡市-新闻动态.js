@@ -46,7 +46,7 @@ async function t1(url) {
         },
         "body": null,
         "method": "GET"
-    }).then(res=>res.json());
+    }).then(res => res.json());
     let pages = res.endPage
     //--------
     // console.log(pages);
@@ -86,7 +86,7 @@ async function t2(url) {
         if (urlaa !== '') {
 
             if (!urlaa.includes('www.gov.cn')) {
-                urlList.push(url1+urlaa)
+                urlList.push(url1 + urlaa)
             }
         }
     })
@@ -109,7 +109,7 @@ async function t3(url) {
         let publish_date = $('.hap_xq_data span').eq(2).text().split(' ')[0].split('-').join('.')
         let author = $('.hap_xq_data span').eq(1).text().trim()
         let content_h = $('.hap_xq_content')
-        let content = content_h.html()
+        let content = content_h.text()
 
         let digest = content_h.text().replace(/[\r\n\s]+/g, "").slice(0, 100);
         let img_exist = 0;

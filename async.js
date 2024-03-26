@@ -1,5 +1,5 @@
 const pool = require('./util/mysql.js');
-const pool2 = require('./util/mysql2.js');
+const pool2 = require('./util/mysql.js');
 
 async function asyncTest() {
     let flag = new Promise((resolve, reject) => {

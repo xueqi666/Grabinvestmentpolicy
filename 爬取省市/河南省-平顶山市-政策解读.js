@@ -67,7 +67,7 @@ async function t2(url) {
     //------
     $('.content_list a').each((index, element) => {
         let urlaa = $(element).attr('href').replace(/^\.\//, '') || '';
-        if (urlaa !== '' ) {
+        if (urlaa !== '') {
 
             if (!urlaa.includes('www.gov.cn')) {
                 urlList.push(urlaa)
@@ -94,7 +94,7 @@ async function t3(url) {
         let publish_date = $('.article-info span').eq(1).text().split('：')[1].trim().split('-').join('.')
         let author = $('.article-info span').eq(0).text().split('：')[1].trim()
         let content_h = $('.article-details')
-        let content = content_h.html()
+        let content = content_h.text()
 
         let digest = content_h.text().replace(/[\r\n\s]+/g, "").slice(0, 100);
         let img_exist = 0;

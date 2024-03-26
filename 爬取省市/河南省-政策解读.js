@@ -118,7 +118,7 @@ async function t3(url) {
             let title = $('#title').text().trim()
             let publish_date = $('.td-r:last').text().replace(/(年|月)/g, '.').replace("日", "");
             let author = $('.td-r').eq(2).text().replace(/(年|月)/g, '.').replace("日", "");
-            let content = $('.content').html()
+            let content = $('.content').text()
 
             let digest = $('.content').text().replace(/[\r\n\s]+/g, "").slice(0, 100);
             let img_exist = 0;

@@ -68,7 +68,7 @@ async function t3(url) {
         let publish_date = $('.info span').eq(0).text().trim().split('：')[1].split(' ')[0].split('/').join('.')
         let author = $('.info span').eq(1).text().trim().split('：')[1]
 
-        let content = $('.entry').html()
+        let content = $('.entry').text()
 
         let digest = $('.entry').text().trim().slice(0, 100)
         let img_exist = 0;

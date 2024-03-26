@@ -59,7 +59,7 @@ async function t1(data) {
     if (pages === 1) {
         urlList.push(url)
     } else {
-     
+
         for (let i = 0; i < pages; i++) {
             if (i === 0) {
                 urlList.push(data)
@@ -120,7 +120,7 @@ async function t3(url) {
             let publish_date = $('.context tr').eq(2).text().trim().split('：')[3].match(/\d+/g).join('.')
             let author = $('.context tr').eq(2).text().trim().split('：')[1].split(' ')[0]
             let content_h = $('.context tbody')
-            let content = content_h.html()
+            let content = content_h.text()
 
             let digest = content_h.text().replace(/[\r\n\s]+/g, "").slice(0, 100);
             let img_exist = 0;
@@ -158,5 +158,5 @@ module.exports = {
     location: '河南省-开封市',
     tag: "政策解读",
     homeUrl: 'gwcsCode=undefined&divId=8a28897b41a1a8f10141b9b4525805dapagelist&requestUrl=https://www.kaifeng.gov.cn/viewCmsCac.do&cacId=ff8080816fa41abb016fa7a08dca0e19&queryString=undefined'
-}   
+}
 

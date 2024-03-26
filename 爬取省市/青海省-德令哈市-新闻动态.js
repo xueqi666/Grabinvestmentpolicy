@@ -8,26 +8,26 @@ let axiosOption = {
 async function t1(url) {
     let resHtml = await axios.get(url, axiosOption)
     let $ = cheerio.load(resHtml.data)
-        //--------
-        // let str = $(".page").text();
-        // const regex = /createPageHTML\((\d+)/;
-        // const match = str.match(regex);
-        // let pages = parseInt(match[1]);
-        //--------
-    let pages = $('.p_pages span').eq(-3) .text()
+    //--------
+    // let str = $(".page").text();
+    // const regex = /createPageHTML\((\d+)/;
+    // const match = str.match(regex);
+    // let pages = parseInt(match[1]);
+    //--------
+    let pages = $('.p_pages span').eq(-3).text()
     let urlList = []
     if (pages === 1) {
         urlList.push(url)
-     
+
     } else {
         for (let i = 0; i < pages; i++) {
             if (i === 0) {
                 urlList.push(url)
             } else {
-                urlList.push(url.replace(/.htm/,`/${i}.htm`))
+                urlList.push(url.replace(/.htm/, `/${i}.htm`))
             }
         }
- 
+
 
 
     }
@@ -44,7 +44,7 @@ async function t2(url) {
     $('.fr ul #lineu6_0 a').each((index, element) => {
         let urlaa = $(element).attr('href').replace(/^\.\//, '') || '';
         if (urlaa !== '') {
-            urlList.push('http://www.delingha.gov.cn/'+urlaa.substring(3))
+            urlList.push('http://www.delingha.gov.cn/' + urlaa.substring(3))
         }
     })
 
@@ -61,21 +61,21 @@ async function t3(url) {
         let resHtml = await axios.get(url, axiosOption)
         let $ = cheerio.load(resHtml.data)
 
-    
+
         let title = $('.info header h1').text().trim();
         let author = '德令哈市人民政府'
         let str = $('.info header p ').text().trim();
         var regex = /\d+/g;
-        var publish_date = str.match(regex).slice(0,3).join('.');
-        let content = $('#vsb_content_4').html()
-        let digest =$('#vsb_content_4').text().trim().slice(0, 100)
+        var publish_date = str.match(regex).slice(0, 3).join('.');
+        let content = $('#vsb_content_4').text()
+        let digest = $('#vsb_content_4').text().trim().slice(0, 100)
         let img_exist = 0;
         let imgs = $('#vsb_content_4').find('img');
         if (imgs.length > 0) {
-            img_exist = 1; 
+            img_exist = 1;
         }
-       
-       
+
+
         // console.log(img_exist);
         return { title, author, digest, content, publish_date, img_exist }
     } catch (error) {

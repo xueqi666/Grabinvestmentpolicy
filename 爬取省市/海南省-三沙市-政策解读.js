@@ -15,7 +15,7 @@ async function t1(url) {
     var pattern = /(\d+)/;
     var match = str.match(pattern);
     let pages = parseInt(match[0]);
-    
+
     // --------
     let urlList = []
     if (pages === 1) {
@@ -72,7 +72,7 @@ async function t3(url) {
         let publish_date = $('publishtime').text().trim().split(' ')[0].split('-').join('.')
         let author = $('#ly').text().trim().trim()
 
-        let content = $('ucapcontent').html()
+        let content = $('ucapcontent').text()
 
         let str = $('ucapcontent').text().trim().slice(0, 100)
 

@@ -41,7 +41,7 @@ async function t2(url) {
     let urlList = []
     var pattern = /^(https?:\/\/[^\/]+)/;
     var match = url.match(pattern);
-     url1 = match[1]
+    url1 = match[1]
     //------
     $('.art-ul a').each((index, element) => {
         let urlaa = $(element).attr('href').replace(/^\.\//, '') || '';
@@ -71,7 +71,7 @@ async function t3(url) {
         let publish_date = $('#date').text().trim().split('  ')[0].split('：')[1].split('-').join('.')
         let author = $('#source').text().trim().substring(5).trim()
 
-        let content = $('.BSHARE_TEXT').html()
+        let content = $('.BSHARE_TEXT').text()
 
         let str = $('.BSHARE_TEXT').text().trim().slice(0, 100)
 

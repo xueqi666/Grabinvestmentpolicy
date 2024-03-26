@@ -14,22 +14,22 @@ async function t1(url) {
     let str = $(".art-ul  script ").text()
     var regex = /\d+/g;
     const match = str.match(regex);
-    let pages = parseInt(match[0]); 
+    let pages = parseInt(match[0]);
     // --------
     let urlList = []
     if (pages === 1) {
         urlList.push(url)
 
     } else {
-        for (let i = 0; i <pages; i++) {
+        for (let i = 0; i < pages; i++) {
             if (i === 0) {
                 urlList.push(url)
             } else {
-                const newUrl = url.replace(".shtml", `_${i+1}.shtml`);
+                const newUrl = url.replace(".shtml", `_${i + 1}.shtml`);
                 urlList.push(newUrl)
             }
         }
-    } 
+    }
 
     return urlList
     // console.log(urlList);
@@ -71,7 +71,7 @@ async function t3(url) {
         let publish_date = $('#date').text().trim().split('  ')[0].split('：')[1].split('-').join('.')
         let author = $('#source').text().trim().substring(5).trim()
 
-        let content = $('.BSHARE_TEXT').html()
+        let content = $('.BSHARE_TEXT').text()
 
         let str = $('.BSHARE_TEXT').text().trim().slice(0, 100)
 

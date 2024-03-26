@@ -40,7 +40,7 @@ async function t2(url) {
     $('.cm-news-list a').each((index, element) => {
         let urlaa = $(element).attr('href').replace(/^\.\//, '') || '';
         if (urlaa !== '') {
-            urlList.push(url +urlaa)
+            urlList.push(url + urlaa)
         }
     })
 
@@ -60,7 +60,7 @@ async function t3(url) {
 
         let title = $('.tm').text().trim();
         let publish_date = $('.forlin p').eq(2).find('.sp2 .xq').text().trim().split('-').join('.');
-        let content = $('.dps').html()
+        let content = $('.dps').text()
         let digest = $('.dps').text().trim().slice(0, 100)
         let img_exist = 0;
         let imgs = $('.dps').find('img');

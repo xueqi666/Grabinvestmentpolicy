@@ -69,7 +69,7 @@ async function t3(url) {
 
         let title = $('.xly-t h1').text().trim()
         let publish_date = $('.xly-x span').eq(0).text().trim().split(' ')[0].split('-').join('.')
-        let content = $('.xly-nr').html()
+        let content = $('.xly-nr').text()
 
         let digest = $('.xly-nr').text().trim().slice(0, 100)
         let img_exist = 0;

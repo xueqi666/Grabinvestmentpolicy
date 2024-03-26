@@ -46,7 +46,6 @@ async function t2(url) {
         }
     })
 
-    console.log('我是第一个');
 
     //------
     return urlList
@@ -69,7 +68,7 @@ async function t3(url) {
         var regex = /\d+/g;
         let publish_date = str_1.match(regex).join('.');
         let author = '黔东南州投资促进局'
-        let content = $('#Zoom').html()
+        let content = $('#Zoom').text()
 
         let digest = $('#Zoom').text().trim().slice(0, 100)
         let img_exist = 0;

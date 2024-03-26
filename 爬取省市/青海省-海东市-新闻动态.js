@@ -17,16 +17,16 @@ async function t1(url) {
     //--------
     let urlList = []
 
-        for (let i = 1; i <= pages; i++) {
-            var regex = /\d+$/;
-            var newUrl = url.replace(regex, '');
-            urlList.push(newUrl + i)
+    for (let i = 1; i <= pages; i++) {
+        var regex = /\d+$/;
+        var newUrl = url.replace(regex, '');
+        urlList.push(newUrl + i)
     }
 
-        return urlList
-    
+    return urlList
 
- 
+
+
 }
 
 async function t2(url) {
@@ -56,11 +56,11 @@ async function t3(url) {
 
 
         let title = $('table[width="94%"] tr').eq(0).text().trim()
- 
-    
+
+
         let publish_date = $('table[width="94%"] tr').eq(1).text().trim().split('：')[2].replace(/年|月/g, '.').replace('日', '');
         let author = '海东市人民政府'
-        let content = $('.heizi12').eq(2).html()
+        let content = $('.heizi12').eq(2).text()
 
         let digest = $('.heizi12').eq(2).text().trim().slice(0, 100)
         let img_exist = 0;

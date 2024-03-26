@@ -97,7 +97,7 @@ async function t3(url) {
         let publish_date = $('.addtime').text().trim()
         let author = $('.author').text().trim().split("\n")[1].trim()
         let content_h = $('body > div.box.pagecontent > div:nth-child(4)')
-        let content = content_h.html()
+        let content = content_h.text()
 
         let digest = content_h.text().replace(/[\r\n\s]+/g, "").slice(0, 100);
         let img_exist = 0;

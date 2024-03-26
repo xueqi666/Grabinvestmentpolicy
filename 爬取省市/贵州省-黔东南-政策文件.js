@@ -64,7 +64,7 @@ async function t3(url) {
         // 创建一个正则表达式模式，用于匹配数字
         var regex_1 = /\d+/g;
         let publish_date = str_1.match(regex_1).join('.');
-        let content = $('#Zoom').html()
+        let content = $('#Zoom').text()
         let digest = $('#Zoom').text().trim().slice(0, 100)
         let img_exist = 0;
         let imgs = $('#Zoom').find('img');

@@ -102,7 +102,7 @@ async function t3(url) {
             let end = str.indexOf("时间：");
             let author = str.slice(index, end);
             let content_h = $('.news_content_content')
-            let content = content_h.html()
+            let content = content_h.text()
 
             let digest = content_h.text().replace(/[\r\n\s]+/g, "").slice(0, 100);
             let img_exist = 0;

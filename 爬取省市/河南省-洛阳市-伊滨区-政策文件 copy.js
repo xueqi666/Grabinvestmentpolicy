@@ -98,9 +98,9 @@ async function t3(url) {
             let title = $('.article h2').text().trim()
             let author = $('.article p span').eq(0).text().trim()
             let publish_date = $('.article p span').eq(1).text().trim().split(' ')[0].split('-').join('.')
-          
+
             let content_h = $('.content')
-            let content = content_h.html()
+            let content = content_h.text()
 
             let digest = content_h.text().replace(/[\r\n\s]+/g, "").slice(0, 100);
             let img_exist = 0;

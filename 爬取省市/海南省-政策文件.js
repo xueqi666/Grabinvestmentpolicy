@@ -13,7 +13,7 @@ async function t1(url) {
     let str = $('.flfg_02 script').text();
     var regex = /\d+/g; // 匹配一个或多个数字
     var pages = str.match(regex)[0];
-   
+
     // const regex = /createPageHTML\((\d+)/;
     // const match = str.match(regex);
     // let pages = parseInt(match[1]);
@@ -27,7 +27,7 @@ async function t1(url) {
                 urlList.push(url)
             } else {
                 let url1 = url.replace(/.shtml/, `_${i + 1}.shtml`)
-    
+
                 urlList.push(url1)
             }
         }
@@ -49,7 +49,7 @@ async function t2(url) {
     $('.flfg_038-01 a').each((index, element) => {
         let urlaa = $(element).attr('href').replace(/^\.\//, '') || '';
         if (urlaa !== '') {
-            urlList.push('https://dofcom.hainan.gov.cn'+urlaa)
+            urlList.push('https://dofcom.hainan.gov.cn' + urlaa)
         }
     })
 
@@ -76,7 +76,7 @@ async function t3(url) {
         // var regex = /\d+/g;
         let publish_date = $('.xxgk-syxl-t span').eq(-3).text().split('：')[1].split('  ')[0].split('-').join('.')
         let author = $('.xxgk-syxl-t span').eq(2).text().split('：')[1]
-        let content = $('ucapcontent').html()
+        let content = $('ucapcontent').text()
 
         let digest = $('ucapcontent').text().trim().slice(0, 100)
         let img_exist = 0;

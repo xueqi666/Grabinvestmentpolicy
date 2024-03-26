@@ -6,7 +6,6 @@ let axiosOption = {
     },
 }
 async function t1(url) {
-
     let resHtml = await axios.get(url, axiosOption)
     let $ = cheerio.load(resHtml.data)
 
@@ -72,7 +71,7 @@ async function t3(url) {
         let publish_date = $('.ty-p1 span').eq(1).text().trim().split('：')[1].split(' ')[0].split('-').join('.')
         let author = $('.ty-p1 span').eq(0).text().trim().split('：')[1]
 
-        let content = $('.zx-xxxqy-nr').html()
+        let content = $('.zx-xxxqy-nr').text()
 
         let str = $('.zx-xxxqy-nr').text().trim().slice(0, 100)
 

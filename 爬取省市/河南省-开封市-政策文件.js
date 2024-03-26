@@ -120,7 +120,7 @@ async function t3(url) {
             let publish_date = $('.context tr').eq(2).text().trim().split('：')[3].match(/\d+/g).join('.')
             let author = $('.context tr').eq(2).text().trim().split('：')[1].split(' ')[0]
             let content_h = $('.context tbody')
-            let content = content_h.html()
+            let content = content_h.text()
 
             let digest = content_h.text().replace(/[\r\n\s]+/g, "").slice(0, 100);
             let img_exist = 0;

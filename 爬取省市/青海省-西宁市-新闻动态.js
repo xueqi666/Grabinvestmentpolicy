@@ -61,7 +61,7 @@ async function t3(url) {
 
         let title = $('.xx-tit').text().trim();
         let publish_date = $('.cm-con').eq(0).text().trim().split('-').join('.')
-        let content = $('#wenzhangzhengwen').html()
+        let content = $('#wenzhangzhengwen').text()
         let digest = $('#wenzhangzhengwen').text().trim().slice(0, 100)
         let img_exist = 0;
         let imgs = $('#wenzhangzhengwen').find('img');
