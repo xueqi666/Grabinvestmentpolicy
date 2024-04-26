@@ -1,10 +1,15 @@
 const fs = require('fs');
 const pool = require('../util/mysql');
 
+let date = new Date();
+const file = `${date.getFullYear()}-${date.getMonth() + 1}-${date.getDate()}_policy.txt`;
+
+
+
 
 (async function main() {
     let contentList = await new Promise((res, rej) => {
-        pool.query(`SELECT publish_date,tag_type,postion,content FROM article_content where content is not null`, (err, results) => {
+        pool.query(`SELECT publish_date,tag_type,postion,content FROM article_content where content is not null limit 2000 `, (err, results) => {
             if (err) {
                 console.log(err);
                 rej(err);
@@ -22,8 +27,14 @@ const pool = require('../util/mysql');
     })
     for (let i = 0; i < contentList.length; i++) {
         try {
+         
+
             if (contentList[i]) {
-                await fs.promises.appendFile("./policy.txt", contentList[i].time + ":" + contentList[i].tag_type + ':' + contentList[i].postion + ':' + contentList[i].text.trim() + '\n')
+                await fs.promises.appendFile(file, contentList[i].time + ":" + contentList[i].tag_type + ':' + contentList[i].postion + ':' + contentList[i].text.trim() + '\n')
+            }
+            if (i === contentList.length - 1) {
+                console.log("知识源收集成功");
+                process.exit(1)
             }
         } catch (error) {
             console.error('追加内容时出现错误：', error);
@@ -33,3 +44,5 @@ const pool = require('../util/mysql');
     }
 
 })()
+
+

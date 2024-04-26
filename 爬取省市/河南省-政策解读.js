@@ -116,19 +116,14 @@ async function t3(url) {
             let $ = cheerio.load(resHtml.data)
 
             let title = $('#title').text().trim()
-            let publish_date = $('.td-r:last').text().replace(/(年|月)/g, '.').replace("日", "");
-            let author = $('.td-r').eq(2).text().replace(/(年|月)/g, '.').replace("日", "");
-            let content = $('.content').text()
+            let publish_date = $('#pubDate').text().split(' ')[0].split('-').join('.')
+            let author = $('#source').text().trim()
+            let content = $('#content').text()
 
-            let digest = $('.content').text().replace(/[\r\n\s]+/g, "").slice(0, 100);
-            let img_exist = 0;
-            let imgs = $('ucapcontent').find('img');
-            if (imgs.length > 0) {
-                img_exist = 1;
-            }
 
-            // console.log(publish_date);
-            return { title, author, digest, content, publish_date, img_exist }
+
+            // console.log(content);
+            return { title, author, content, publish_date }
         } catch (error) {
             console.log(error);
         }
@@ -145,7 +140,7 @@ async function t3(url) {
 }
 // t1('https://www.hainan.gov.cn/hainan/zmgyshj/list_hnzymyg.shtml')
 // t2('https://www.hainan.gov.cn/hainan/zcfgqh/list_hnzymyg.shtml')
-// t3('https://www.hainan.gov.cn/hainan/zmghnwj/202305/9b10a3ce52a049269ef0f5d37f587370.shtml?ddtab=true')
+// t3('https://www.henan.gov.cn/2023/12-20/2869647.html')
 module.exports = {
     t1,
     t2,
