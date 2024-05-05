@@ -1,9 +1,4 @@
 
-if (false || false) {
-    console.log('verdadeiro')
-} else {
-    console.log('falso')
-}
 
 const timestamp = 1617226800000; // 表示 2024-04-01 的时间戳
 const date3 = new Date(timestamp);
