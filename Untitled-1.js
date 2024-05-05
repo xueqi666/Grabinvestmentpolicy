@@ -1,12 +1,12 @@
 let v = [1, 34, 4]111111111
 
 if (false || false) {
-    console.log('verdadeiro')
+    console.log('verdadeiro')啊啊啊啊啊啊啊啊啊啊
 } else {
     console.log('falso')
 }
 
-const timestamp = 1617226800000; // 表示 2024-04-01 的时间戳
+const timestamp = 1617226800000; 啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊// 表示 2024-04-01 的时间戳
 const date3 = new Date(timestamp);
 
 console.log(Date.now());
