@@ -106,25 +106,20 @@ async function getArticleDetail() {
         if (error) {
             console.error('查询失败:', error);
             process.exit();
-
         }
         if (results.length === 0) {
             console.log('没有数据');
             process.exit();
-
         }
         for (let i = 0; i < results.length; i++) {
-
             try {
                 let url = results[i].url;
                 console.log('正在查询第' + results[i].url_id + '个');
-
                 //_____________
                 await sleep(300);
                 let title, author, digest, content, publish_date, img_exist
                 let pdf_exist = 0;
                 if (url.includes('pdf')) {
-
                     pdf_exist = 1
                 } else {
                     try {
@@ -133,15 +128,11 @@ async function getArticleDetail() {
                         console.log('t3方法返回值有问题' + e);
                         continue
                     }
-
-
                 }
-
                 let create_time = getCreateDate()
                 let postion = results[i].postion
                 let tag_type = results[i].tag_type
                 let url_id = results[i].url_id
-
                 const insert = `INSERT INTO article_content (title, author,url_id,content,publish_date,tag_type,postion) VALUES (?,?,?,?,?,?,?)`;
                 let params = [title, author, url_id, content, publish_date, tag_type, postion]
                 let flagSuccess = await new Promise((resolve, reject) => {
@@ -149,15 +140,12 @@ async function getArticleDetail() {
                         if (error) {
                             console.error('文章插入失败:', error);
                             resolve(false)
-
                         } else {
                             console.log('插入成功');
                             resolve(true)
                         }
                     });
                 })
-
-
                 if (flagSuccess) {
                     let falg = await new Promise((resolve, rejects) => {
                         pool.query('update url_article set status = 1 where url_id = ' + results[i].url_id, (error, results) => {
@@ -170,10 +158,8 @@ async function getArticleDetail() {
                     })
                     if (falg) {
                         console.log(`第${results[i].url_id}条状态改变成功`);
-
                     } else {
                         console.log(`第${results[i].url_id}条状态改变失败`);
-
                     }
                 }
                 if (i + 1 === results.length) {

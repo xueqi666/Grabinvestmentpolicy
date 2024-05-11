@@ -29,7 +29,6 @@ async function t0(url) {
         if (error.response) {
             // 请求发生重定向时的处理
             let value = error.response.headers['set-cookie'][0].split(';')[0]
-
             resHtml = await axios.get(url, {
                 headers: {
                     'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/94.0.4606.81 Safari/537.36',
@@ -37,8 +36,6 @@ async function t0(url) {
 
                 }
             })
-
-
         } else {
             // 其他错误处理
             console.error(error);
@@ -47,13 +44,11 @@ async function t0(url) {
 
     return resHtml
 }
+
+//获取所有页码
 async function t1(url) {
-
     let resHtml = await t0(url)
-
     let $ = cheerio.load(resHtml.data)
-
-    //--------
     var pageSize = Number($('#pageDec').attr('pagesize'));
     var pageCount = Number($('#pageDec').attr('pagecount'));
     let pages = 0
@@ -62,12 +57,9 @@ async function t1(url) {
     } else {
         pages = Math.ceil(pageCount / pageSize)
     }
-
-    // --------
     let urlList = []
     if (pages === 1) {
         urlList.push(`${url}index.html`)
-
     } else {
         for (let i = 0; i < pages; i++) {
             if (i === 0) {
@@ -76,9 +68,7 @@ async function t1(url) {
                 urlList.push(`${url}index_${i + 1}.html`)
             }
         }
-
     }
-    // console.log(urlList);
     return urlList
 }
 
@@ -106,42 +96,29 @@ async function t2(url) {
     return urlList
 }
 
+//获取招商政策内容
 async function t3(url) {
-
     if (url.includes('henan')) {
-
         try {
-
             let resHtml = await t0(url)
             let $ = cheerio.load(resHtml.data)
-
             let title = $('#title').text().trim()
             let publish_date = $('.td-r:last').text().replace(/(年|月)/g, '.').replace("日", "");
             let author = $('.td-r').eq(2).text().replace(/(年|月)/g, '.').replace("日", "");
             let content = $('.content').text()
-
             let digest = $('.content').text().replace(/[\r\n\s]+/g, "").slice(0, 100);
             let img_exist = 0;
             let imgs = $('ucapcontent').find('img');
             if (imgs.length > 0) {
                 img_exist = 1;
             }
-
-            // console.log(publish_date);
             return { title, author, digest, content, publish_date, img_exist }
         } catch (error) {
             console.log(error);
         }
-
-
-
-
     } else {
         console.log('不是我需要的链接');
     }
-
-
-
 }
 
 // t1('https://www.henan.gov.cn/zt/2023zt/yhyshjhnjxs/yszc/')
